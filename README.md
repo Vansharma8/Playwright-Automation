@@ -16,11 +16,12 @@ https://todomvc.com/
 Framework used: React
 
 Project Structure
-tests/                  → Test specifications  
-pages/                  → Page Object Model (POM) files  
-README.md               → Project documentation  
+tests/ → Test specifications  
+pages/ → Page Object Model (POM) files  
+README.md → Project documentation
 
 Test Scenarios Covered
+
 1. Launch the ToDoMVC application
 2. Add multiple todo items
 3. Mark todo items as completed
@@ -55,6 +56,7 @@ npx playwright show-report
 
 Purpose of This Project
 This project was created to:
+
 1. Practice UI automation using Playwright
 2. Gain hands-on experience with end-to-end testing
 3. Apply Page Object Model concepts
