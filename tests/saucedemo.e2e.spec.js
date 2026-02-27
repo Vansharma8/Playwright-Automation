@@ -3,13 +3,18 @@ import { loginPage } from '../pages/LoginPage';
 import { homePage } from '../pages/HomePage';
 import { checkoutPage } from '../pages/CheckoutPage';
 
+test.describe('SauceDemo E2E Tests', () => {
 
-test('SauceDemo end-to-end checkout flow', async ({ page }) => {
+    test.beforeEach(async ({ page }) => {
+        const login = new loginPage(page);
+        await login.gotoLoginPage();
+    });
+
+test('SauceDemo end-to-end checkout flow @smoke', async ({ page }) => {
   
     //Login
     const login = new loginPage(page);
 
-    await login.gotoLoginPage();
     await login.login('standard_user', 'secret_sauce');
 
     //Home Page
@@ -32,4 +37,23 @@ test('SauceDemo end-to-end checkout flow', async ({ page }) => {
     await checkout.finishCheckout();
     await expect(checkout.completeHeader).toBeVisible();
 
+});
+
+test('Login fails when username and password are blank @negative @auth', async ({ page }) => {
+    const login = new loginPage(page);
+
+    await login.login('', '');
+    await expect(login.error_message).toBeVisible();
+    console.log(await login.getErrorMessage());
+});
+
+test('Login fails for locked out user @negative @auth', async ({ page }) => {
+
+    const login = new loginPage(page);
+
+    await login.login('locked_out_user', 'secret_sauce');
+
+    await expect(login.error_message).toBeVisible();
+    console.log(await login.getErrorMessage());
+});
 });
