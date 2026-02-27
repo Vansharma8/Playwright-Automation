@@ -5,6 +5,7 @@ exports.loginPage = class LoginPage {
         this.username_textBox = page.locator('[data-test="username"]')
         this.password_textBox = page.locator('[data-test="password"]')
         this.login_button = page.locator('[data-test="login-button"]')
+        this.error_message = page.locator('[data-test="error"]')
     }
 
     async gotoLoginPage() {
@@ -15,6 +16,10 @@ exports.loginPage = class LoginPage {
         await this.username_textBox.fill(username);
         await this.password_textBox.fill(password);
         await this.login_button.click();
+    }
+
+    async getErrorMessage() {
+        return await this.error_message.textContent();
     }
 
 }
