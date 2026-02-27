@@ -23,7 +23,9 @@
 ---
 
 ## Test Coverage
+The automation suite covers both **positive and negative scenarios**:
 
+### End-to-End Flow (Happy Path)
 The automation suite covers the following end-to-end flow:
 
 ```
@@ -40,6 +42,24 @@ Login → Inventory Page → Add/Remove Products → Cart → Checkout → Order
 | Checkout | Fill in customer details |
 | Order Summary | Validate total amount visibility |
 | Confirmation | Assert successful order completion |
+
+---
+
+### Negative Scenarios
+- Login with blank username and password
+- Login with locked-out user
+- Validation of error messages on failed authentication
+
+---
+## Test Tagging & Execution Strategy
+
+Tests are tagged to allow selective execution:
+
+| Tag | Purpose |
+|----|--------|
+| `@smoke` | Critical end-to-end checkout flow |
+| `@negative` | Negative and validation scenarios |
+| `@auth` | Authentication-related test cases |
 
 ---
 
@@ -61,8 +81,6 @@ Playwright-Automation/
 ├── package-lock.json
 └── README.md
 ```
-
----
 
 ## Getting Started
 
@@ -96,6 +114,13 @@ npx playwright test --ui
 
 # Run a specific test file
 npx playwright test tests/saucedemo.e2e.spec.js
+
+### Run tagged tests
+# Run only smoke tests
+npx playwright test --grep @smoke
+
+# Run only negative tests
+npx playwright test --grep @negative
 
 # View HTML test report
 npx playwright show-report
