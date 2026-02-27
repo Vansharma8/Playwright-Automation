@@ -164,8 +164,6 @@ tests/          →  WHAT is being tested
 - [ ] API-based test data setup (bypass UI login)
 - [ ] Cross-browser execution (Chromium, Firefox, WebKit)
 - [ ] CI/CD integration via GitHub Actions
-- [ ] Negative test scenarios (invalid login, empty cart checkout)
-- [ ] Allure reporting integration
 
 ---
 
