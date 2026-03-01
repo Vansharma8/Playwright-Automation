@@ -1,6 +1,11 @@
 # SauceDemo E2E Automation — Playwright + JavaScript
 
-> End-to-end test automation for [SauceDemo](https://www.saucedemo.com/) covering the complete user journey from login to order confirmation, built with **Playwright** and the **Page Object Model (POM)** design pattern.
+![CI](https://github.com/Vansharma8/Playwright-Automation/actions/workflows/playwright.yml/badge.svg)
+![Playwright](https://img.shields.io/badge/Playwright-2EAD33?style=flat&logo=playwright&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
+![License](https://img.shields.io/badge/License-MIT-blue?style=flat)
+
+> End-to-end test automation for [SauceDemo](https://www.saucedemo.com/) covering the complete user journey from login to order confirmation, built with **Playwright**, **JavaScript**, and the **Page Object Model (POM)** design pattern — with CI integration via **GitHub Actions**.
 
 ---
 
@@ -11,6 +16,7 @@
 | [Playwright](https://playwright.dev/) | Browser automation framework |
 | JavaScript (Node.js) | Test scripting language |
 | Page Object Model | Design pattern for maintainability |
+| GitHub Actions | CI pipeline — auto-runs on every push & PR |
 
 ---
 
@@ -23,43 +29,30 @@
 ---
 
 ## Test Coverage
-The automation suite covers both **positive and negative scenarios**:
 
-### End-to-End Flow (Happy Path)
 The automation suite covers the following end-to-end flow:
 
 ```
 Login → Inventory Page → Add/Remove Products → Cart → Checkout → Order Confirmation
 ```
 
-| Step | Description |
-|---|---|
-| Login | Valid credential authentication |
-| Inventory | Page load validation |
-| Sorting | Product filter dropdown interaction |
-| Cart Management | Add multiple products, remove a product |
-| Cart Navigation | Navigate to cart and verify items |
-| Checkout | Fill in customer details |
-| Order Summary | Validate total amount visibility |
-| Confirmation | Assert successful order completion |
+| Step | Scenario Types | Description |
+|---|---|---|
+| Login | ✅ Positive · ❌ Negative | Valid login, invalid credentials, empty fields |
+| Inventory | ✅ Positive | Page load validation, product listing |
+| Sorting | ✅ Positive | Product filter dropdown interaction |
+| Cart Management | ✅ Positive · ❌ Negative | Add/remove products, empty cart handling |
+| Checkout | ✅ Positive · ❌ Negative | Fill details, missing fields validation |
+| Order Summary | ✅ Positive | Validate total amount visibility |
+| Confirmation | ✅ Positive | Assert successful order completion |
 
----
+### Browsers Tested
 
-### Negative Scenarios
-- Login with blank username and password
-- Login with locked-out user
-- Validation of error messages on failed authentication
-
----
-## Test Tagging & Execution Strategy
-
-Tests are tagged to allow selective execution:
-
-| Tag | Purpose |
-|----|--------|
-| `@smoke` | Critical end-to-end checkout flow |
-| `@negative` | Negative and validation scenarios |
-| `@auth` | Authentication-related test cases |
+| Browser | Engine | Status |
+|---|---|---|
+| Chromium | Blink | ✅ Passing |
+| Firefox | Gecko | ✅ Passing |
+| WebKit | WebKit | ✅ Passing |
 
 ---
 
@@ -67,6 +60,10 @@ Tests are tagged to allow selective execution:
 
 ```
 Playwright-Automation/
+│
+├── .github/
+│   └── workflows/
+│       └── playwright.yml        # CI pipeline config
 │
 ├── pages/
 │   ├── LoginPage.js              # Login page locators & actions
@@ -82,6 +79,8 @@ Playwright-Automation/
 └── README.md
 ```
 
+---
+
 ## Getting Started
 
 ### Prerequisites
@@ -93,7 +92,7 @@ Playwright-Automation/
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/Playwright-Automation.git
+git clone https://github.com/Vansharma8/Playwright-Automation.git
 cd Playwright-Automation
 
 # Install dependencies
@@ -112,19 +111,34 @@ npx playwright test
 # Run with UI mode
 npx playwright test --ui
 
+# Run in headed mode
+npx playwright test --headed
+
 # Run a specific test file
 npx playwright test tests/saucedemo.e2e.spec.js
 
-### Run tagged tests
-# Run only smoke tests
-npx playwright test --grep @smoke
-
-# Run only negative tests
-npx playwright test --grep @negative
+# Run on a specific browser
+npx playwright test --project=chromium
+npx playwright test --project=firefox
+npx playwright test --project=webkit
 
 # View HTML test report
 npx playwright show-report
 ```
+
+---
+
+## CI/CD — GitHub Actions
+
+Tests automatically run on every **push** and **pull request** via GitHub Actions.
+
+```yaml
+# Triggered on: push & pull_request
+# Browsers: Chromium, Firefox, WebKit
+# Reports: Playwright HTML report uploaded as artifact
+```
+
+Check the [Actions tab](https://github.com/Vansharma8/Playwright-Automation/actions) to see the latest run results.
 
 ---
 
@@ -140,6 +154,9 @@ tests/          →  WHAT is being tested
                    (test flow, assertions)
 ```
 
+### Example — Dynamic Locator for Products
+
+Since SauceDemo has multiple products with similar structures, dynamic locators are used instead of hardcoding selectors for each item.
 
 ### Benefits
 
@@ -152,29 +169,33 @@ tests/          →  WHAT is being tested
 
 ## Test Strategy
 
-- Validates the complete happy-path checkout flow end-to-end
-- Uses visibility assertions to confirm critical UI elements are rendered
-- Employs dynamic locators to handle multiple similar product elements
+- Validates the complete **happy-path** checkout flow end-to-end
+- Covers **negative scenarios** — invalid login, empty fields, missing checkout info
+- Employs **dynamic locators** to handle multiple similar product elements
+- **Cross-browser** execution across Chromium, Firefox, and WebKit
+- **CI pipeline** ensures tests run automatically on every code change
 - Confirms order completion by asserting on the confirmation message and total amount
 
 ---
 
 ## Roadmap
 
+- [x] E2E happy-path flow automation
+- [x] Negative test scenarios
+- [x] Cross-browser execution (Chromium, Firefox, WebKit)
+- [x] CI/CD integration via GitHub Actions
 - [ ] API-based test data setup (bypass UI login)
-- [ ] Cross-browser execution (Chromium, Firefox, WebKit)
-- [ ] CI/CD integration via GitHub Actions
+- [ ] Allure reporting integration
 
 ---
 
 ## Author
 
-**Vansh Sharma**
-QA Automation Engineer
+**Vansh Sharma** — QA Engineer | Product-Focused
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/vansh-sharma-a77774223/)
-[![GitHub](https://img.shields.io/badge/GitHub-Follow-black?style=flat&logo=github)](https://github.com/Vansharma8)
+[![GitHub](https://img.shields.io/badge/GitHub-Vansharma8-black?style=flat&logo=github)](https://github.com/Vansharma8)
 
 ---
 
-> This project demonstrates real-world Playwright automation practices including POM architecture, dynamic locator strategies, and structured E2E test design — built as a portfolio-ready automation suite.
+> This project demonstrates real-world Playwright automation practices including POM architecture, dynamic locator strategies, negative testing, cross-browser validation, and CI integration — built as a portfolio-ready automation suite.
