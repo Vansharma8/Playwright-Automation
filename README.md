@@ -5,7 +5,7 @@
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
 ![License](https://img.shields.io/badge/License-MIT-blue?style=flat)
 
-> End-to-end test automation for [SauceDemo](https://www.saucedemo.com/) covering the complete user journey from login to order confirmation, built with **Playwright**, **JavaScript**, and the **Page Object Model (POM)** design pattern — with CI integration via **GitHub Actions**.
+> End-to-end test automation for [SauceDemo](https://www.saucedemo.com/) covering the complete user journey from login to order confirmation, built with **Playwright**, **JavaScript**, and the **Page Object Model (POM)** design pattern with CI integration via **GitHub Actions**.
 
 ---
 
